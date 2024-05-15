@@ -48,7 +48,7 @@ for repo_name in repo_names:
         # Extract repo URLs for PRs created by "dependabot"
         for pull in pulls:
             if pull.get("user", {}).get("login") == "dependabot":
-                if "head" in pull and "repo" in pull["head"]:
+                if "html_url" in pull and "created_at" in pull:
                     repo_url = pull["html_url"]
                     created_at = pull["created_at"]
                     # Calculate the number of days since the PR was opened
