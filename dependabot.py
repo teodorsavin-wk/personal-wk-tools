@@ -3,7 +3,7 @@ from datetime import datetime, timezone
 import requests
 
 TOKEN_ENV_VAR = "HOMEBREW_GITHUB_TOKEN"
-GITHUB_PR_OWNER = "dependabot"
+GITHUB_PR_OWNER = "dependabot[bot]"
 BASE_URL = "https://api.github.com/repos/Workiva/"
 REPO_NAMES = [
     "xbrl-module",
@@ -12,9 +12,10 @@ REPO_NAMES = [
     "xbrl-orchestrator",
     "xbrl-reports",
     "xbrl-model",
+    "xbrl-data-server",
     "language-translator",
     "language_translator_client",
-    "xbrl-data-server"
+    "cldr-go"
 ]
 
 def get_token():
