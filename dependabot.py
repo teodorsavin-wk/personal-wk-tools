@@ -1,4 +1,5 @@
 import os
+from datetime import datetime, timezone
 import requests
 
 # Load the token from the environment variable
@@ -27,16 +28,19 @@ repo_names = [
     "xbrl-data-server"
 ]
 
-repo_urls = []
-
 # Iterate over each repo name in the list
 for repo_name in repo_names:
+
+    print('-----------------------------------')
+    print(f"Checking for dependabot PRs in {repo_name}")
+
     # Construct the complete URL
     url = base_url + repo_name + "/pulls"
 
     # Make the GET request
     response = requests.get(url, headers=headers)
 
+    repo_urls = []
     # Check if the request was successful
     if response.status_code == 200:
         pulls = response.json()
@@ -46,13 +50,21 @@ for repo_name in repo_names:
             if pull.get("user", {}).get("login") == "dependabot":
                 if "head" in pull and "repo" in pull["head"]:
                     repo_url = pull["html_url"]
-                    repo_urls.append(repo_url)
+                    created_at = pull["created_at"]
+                    # Calculate the number of days since the PR was opened
+                    created_date = datetime.strptime(created_at, "%Y-%m-%dT%H:%M:%SZ").replace(tzinfo=timezone.utc)
+                    current_date = datetime.now(timezone.utc)
+
+                    days_open = (current_date - created_date).days
+                    repo_urls.append((repo_url, days_open))
         if not repo_urls:
             print(f"No dependabot PRs for {repo_name}")
         else:
             print("URLs for Open PRs created by 'dependabot' for " + url + " :")
-            for repo_url in repo_urls:
-                print(repo_url)
+            for repo_url, days_open in repo_urls:
+                print(f"    - {repo_url} - Open for {days_open} days")
+        print('-----------------------------------')
+        print('')
     else:
         print(f"Failed to retrieve data: {response.status_code}")
         print(response.text)
