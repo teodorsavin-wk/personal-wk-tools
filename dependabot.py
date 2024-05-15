@@ -48,7 +48,7 @@ for repo_name in repo_names:
                     repo_url = pull["html_url"]
                     repo_urls.append(repo_url)
         if not repo_urls:
-            print(f"No dependabot for {repo_name}")
+            print(f"No dependabot PRs for {repo_name}")
         else:
             print("URLs for Open PRs created by 'dependabot' for " + url + " :")
             for repo_url in repo_urls:
