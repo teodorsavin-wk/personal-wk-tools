@@ -6,6 +6,22 @@ TOKEN_ENV_VAR = "HOMEBREW_GITHUB_TOKEN"
 GITHUB_PR_OWNER = "dependabot[bot]"
 BASE_URL = "https://api.github.com/repos/Workiva/"
 REPO_NAMES = [
+    "fs-viewer",
+    "fs-viewer-api",
+    "gradle-build-tools",
+    "microservices-java",
+    "reporting-calendar-api",
+    "taxonomy-analyzer",
+    "wack-client-py",
+    "wCommander",
+    "xbrl-importer",
+    "xbrl-importer-api",
+    "xbrl-orchestrator-api",
+    "xbrl-review-api",
+    "XBRL-Skynet-Signals",
+    "xbrl2-server-api",
+    "xbrl2-server-sdk",
+    "xbrl2-validation-agent",
     "xbrl-module",
     "xml-translator",
     "xbrl-translator",
